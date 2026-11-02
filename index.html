@@ -2,104 +2,759 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Taller de Costura – Boceto</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller de Costura – App de Gestión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--g9:#123d28;--g7:#1f6b45;--g5:#2f8f5b;--g2:#cfe9d9;--g1:#eaf6ee;--bg:#f6fbf8;--w:#fff;--tx:#14231b;--mu:#4b6356;--am:#a85d00;--amb:#fff1d9;--rd:#a32a2a;--rdb:#fde8e8}
-*{box-sizing:border-box;margin:0}
-html{font-size:20px}
-html.big{font-size:24px}
-body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.45;display:flex;min-height:100vh}
-button,input,select{font:inherit;color:inherit}
-:focus-visible{outline:4px solid var(--g5);outline-offset:2px}
-.i{width:1.4em;height:1.4em;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-aside{width:270px;background:var(--g9);color:#fff;padding:1.2rem .9rem;display:flex;flex-direction:column;gap:.5rem;position:sticky;top:0;height:100vh}
-.logo{display:flex;align-items:center;gap:.7rem;font-weight:800;font-size:1.2rem;padding:.4rem .6rem 1.2rem}
-.logo span{background:var(--g5);border-radius:14px;padding:.5rem;display:grid}
-nav button{display:flex;align-items:center;gap:.8rem;width:100%;padding:.9rem 1rem;border:0;border-radius:16px;background:none;color:#d6efe1;font-weight:700;cursor:pointer;text-align:left}
-nav button:hover{background:rgba(255,255,255,.1)}
-nav button.on{background:var(--w);color:var(--g9)}
-.zoom{margin-top:auto;border:2px solid var(--g5);background:none;color:#fff;border-radius:16px;padding:.8rem;font-weight:800;cursor:pointer;display:flex;gap:.6rem;align-items:center;justify-content:center}
-main{flex:1;padding:2rem clamp(1rem,3vw,2.5rem) 3rem;max-width:1200px}
-h1{font-size:1.9rem;font-weight:800;color:var(--g9);margin-bottom:.3rem}
-h2{font-size:1.25rem;font-weight:800;color:var(--g9);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
-h2 .i{color:var(--g5)}
-.sub{color:var(--mu);margin-bottom:1.6rem}
-.card{background:var(--w);border:2px solid var(--g2);border-radius:22px;padding:1.4rem}
-.grid{display:grid;gap:1.2rem}
-.stats{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-bottom:1.2rem}
-.stat{display:flex;gap:1rem;align-items:center}
-.stat .ic{background:var(--g1);color:var(--g7);border-radius:18px;padding:.9rem;display:grid}
-.stat.main{background:var(--g7);border-color:var(--g7);color:#fff}
-.stat.main .ic{background:rgba(255,255,255,.18);color:#fff}
-.stat small{display:block;color:var(--mu);font-weight:700}
-.stat.main small{color:#d6efe1}
-.stat b{font-size:1.7rem;font-weight:800}
-.two{grid-template-columns:1.1fr 1fr}
-.bars{display:flex;align-items:flex-end;gap:1rem;height:190px;padding-top:.5rem}
-.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:.3rem;font-weight:700;text-align:center;font-size:.85rem}
-.bar i{display:block;width:100%;background:var(--g5);border-radius:12px 12px 0 0}
-.bar:last-child i{background:var(--g9)}
-.task{display:flex;gap:.9rem;align-items:center;padding:.9rem 0;border-bottom:2px solid var(--g1);cursor:pointer}
-.task:last-child{border:0}
-.box{width:2rem;height:2rem;border-radius:10px;border:3px solid var(--g5);display:grid;place-items:center;flex:none;color:#fff}
-.task.done .box{background:var(--g5)}
-.task.done .t{text-decoration:line-through;color:var(--mu)}
-.t b{display:block}.t small{color:var(--mu)}
-.chip{display:inline-block;padding:.25rem .8rem;border-radius:99px;font-weight:800;font-size:.85rem;background:var(--g1);color:var(--g7);white-space:nowrap}
-.chip.mid{background:var(--amb);color:var(--am)}
-.chip.no{background:var(--rdb);color:var(--rd)}
-.chip.ok{background:var(--g2);color:var(--g9)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:56px;padding:.6rem 1.3rem;border-radius:16px;border:0;background:var(--g7);color:#fff;font-weight:800;cursor:pointer}
-.btn:hover{background:var(--g9)}
-.btn.out{background:var(--w);color:var(--g7);border:3px solid var(--g5)}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.list{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
-.cl{cursor:pointer;text-align:left;width:100%;transition:.15s}
-.cl:hover{border-color:var(--g5);transform:translateY(-2px)}
-.cl .h{display:flex;gap:.9rem;align-items:center;margin-bottom:.8rem}
-.av{width:3.4rem;height:3.4rem;border-radius:50%;background:var(--g2);color:var(--g9);display:grid;place-items:center;font-weight:800;font-size:1.3rem;flex:none}
-.cl small{color:var(--mu);display:block}
-.row{display:flex;justify-content:space-between;gap:.8rem;align-items:center;padding:.5rem 0}
-.tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.2rem 0}
-.tab{border:3px solid var(--g2);background:var(--w);border-radius:16px;padding:.7rem 1.2rem;font-weight:800;cursor:pointer;min-height:56px}
-.tab.on{background:var(--g7);border-color:var(--g7);color:#fff}
-.det{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));align-items:start}
-.meds{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-label{font-weight:700;display:block;font-size:.9rem;color:var(--mu)}
-input,select{width:100%;min-height:52px;padding:.5rem .9rem;border:3px solid var(--g2);border-radius:14px;background:var(--w)}
-input:focus,select:focus{border-color:var(--g5);outline:none}
-.sel{margin-bottom:1rem}
-.steps{display:grid;gap:.6rem}
-.step{display:flex;gap:.8rem;align-items:center;padding:.8rem 1rem;border-radius:16px;border:3px solid var(--g2);background:var(--w);font-weight:800;cursor:pointer;text-align:left;min-height:56px}
-.step.past{background:var(--g1);color:var(--g7);border-color:var(--g1)}
-.step.on{background:var(--g7);color:#fff;border-color:var(--g7)}
-.add{display:flex;gap:.6rem;margin-top:.8rem}
-.add .btn{padding:.6rem 1rem}
-.x{border:0;background:none;color:var(--rd);cursor:pointer;padding:.4rem;border-radius:10px}
-.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
-.ph{aspect-ratio:1;border-radius:16px;background:var(--g1);display:grid;place-items:center;color:var(--g5);overflow:hidden}
-.ph img{width:100%;height:100%;object-fit:cover}
-.up{cursor:pointer;border:3px dashed var(--g5);color:var(--g7);font-weight:800;text-align:center;font-size:.8rem;padding:.3rem}
-.sum{background:var(--g1);border-radius:16px;padding:1rem;margin:1rem 0}
-.sum .row{border-bottom:2px solid var(--g2)}
-.sum .row:last-child{border:0;font-size:1.25rem;font-weight:800;color:var(--g9)}
-.back{margin-bottom:1rem}
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--g9);color:#fff;padding:1rem 1.6rem;border-radius:16px;font-weight:800;display:flex;gap:.6rem;align-items:center;z-index:9}
-.toast[hidden]{display:none}
-@media(max-width:900px){.two{grid-template-columns:1fr}}
-@media(max-width:760px){
- body{flex-direction:column}
- aside{width:100%;height:auto;position:fixed;bottom:0;left:0;z-index:5;flex-direction:row;padding:.4rem;border-radius:20px 20px 0 0}
- .logo,.zoom span{display:none}.zoom{margin:0;padding:.6rem;width:auto}
- nav{display:flex;flex:1}nav button{flex-direction:column;gap:.1rem;padding:.5rem;font-size:.75rem;text-align:center;align-items:center}
- main{padding-bottom:7rem}
- .meds{grid-template-columns:1fr}
+:root {
+  --g9: #0d311f;
+  --g8: #123d28;
+  --g7: #1f6b45;
+  --g5: #2f8f5b;
+  --g4: #54b27d;
+  --g2: #cfe9d9;
+  --g1: #eaf6ee;
+  --bg: #f4f8f5;
+  --w: #ffffff;
+  --tx: #14231b;
+  --mu: #577063;
+  --am: #a85d00;
+  --amb: #fff1d9;
+  --rd: #b92b2b;
+  --rdb: #fde8e8;
+  --shadow-sm: 0 4px 12px rgba(18, 61, 40, 0.05);
+  --shadow-md: 0 8px 24px rgba(18, 61, 40, 0.08);
+  --shadow-float: 0 12px 32px rgba(13, 49, 31, 0.22);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 18px; }
+html.big { font-size: 22px; }
+
+body {
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--tx);
+  line-height: 1.45;
+  display: flex;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--g5);
+  outline-offset: 3px;
+}
+
+/* Iconos SVG */
+.i {
+  width: 1.35em;
+  height: 1.35em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+/* --- SIDEBAR EN DESKTOP / BARRA FLOTANTE EN MÓVIL --- */
+aside {
+  width: 280px;
+  background: var(--g9);
+  color: #fff;
+  padding: 1.4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 900;
+  font-size: 1.25rem;
+  padding: 0.4rem 0.6rem 1.4rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.logo span {
+  background: var(--g5);
+  border-radius: 14px;
+  padding: 0.55rem;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(47, 143, 91, 0.4);
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+nav button {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  padding: 0.95rem 1.1rem;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: #cbe3d5;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+nav button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+nav button.on {
+  background: var(--w);
+  color: var(--g9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.zoom {
+  margin-top: auto;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-radius: 16px;
+  padding: 0.85rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.zoom:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--g5);
+}
+
+/* --- MAIN CONTENIDO --- */
+main {
+  flex: 1;
+  padding: 2.2rem clamp(1rem, 4vw, 3rem) 3.5rem;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.95rem;
+  font-weight: 900;
+  color: var(--g9);
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--g9);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+h2 .i { color: var(--g5); }
+
+.sub {
+  color: var(--mu);
+  margin-bottom: 1.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.card {
+  background: var(--w);
+  border: 2px solid var(--g2);
+  border-radius: 24px;
+  padding: 1.4rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
+}
+
+.grid {
+  display: grid;
+  gap: 1.3rem;
+}
+
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 1.3rem;
+}
+
+.stat {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem;
+}
+
+.stat .ic {
+  background: var(--g1);
+  color: var(--g7);
+  border-radius: 20px;
+  padding: 0.9rem;
+  display: grid;
+  place-items: center;
+}
+
+.stat.main {
+  background: linear-gradient(135deg, var(--g8) 0%, var(--g7) 100%);
+  border-color: var(--g7);
+  color: #fff;
+}
+
+.stat.main .ic {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.stat small {
+  display: block;
+  color: var(--mu);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.stat.main small { color: #d6efe1; }
+
+.stat b {
+  font-size: 1.65rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.two { grid-template-columns: 1.1fr 1fr; }
+
+/* Gráfica de Barras */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 200px;
+  padding-top: 1rem;
+}
+
+.bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 0.4rem;
+  font-weight: 800;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.bar i {
+  display: block;
+  width: 100%;
+  max-width: 44px;
+  background: linear-gradient(to top, var(--g5), var(--g4));
+  border-radius: 12px 12px 0 0;
+  transition: height 0.4s ease;
+}
+
+.bar:last-child i {
+  background: linear-gradient(to top, var(--g9), var(--g7));
+}
+
+/* Tareas y Checklists */
+.task {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 2px solid var(--g1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.task:last-child { border: 0; }
+
+.box {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 12px;
+  border: 3px solid var(--g5);
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.task.done .box {
+  background: var(--g5);
+}
+
+.task.done .t {
+  text-decoration: line-through;
+  color: var(--mu);
+  opacity: 0.7;
+}
+
+.t b { display: block; font-size: 0.95rem; }
+.t small { color: var(--mu); font-weight: 600; font-size: 0.85rem; }
+
+/* Chips y Etiquetas */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  background: var(--g1);
+  color: var(--g7);
+  white-space: nowrap;
+}
+
+.chip.mid { background: var(--amb); color: var(--am); }
+.chip.no { background: var(--rdb); color: var(--rd); }
+.chip.ok { background: var(--g2); color: var(--g9); }
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 16px;
+  border: 0;
+  background: var(--g7);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(31, 107, 69, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--g9);
+  transform: translateY(-1px);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btn.out {
+  background: var(--w);
+  color: var(--g7);
+  border: 2px solid var(--g5);
+  box-shadow: none;
+}
+
+.btn.out:hover {
+  background: var(--g1);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.list {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.cl {
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cl:hover {
+  border-color: var(--g5);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.cl .h {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.av {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: var(--g2);
+  color: var(--g9);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1.25rem;
+  flex: none;
+}
+
+.cl small { color: var(--mu); display: block; font-weight: 600; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin: 1.2rem 0;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  border: 2px solid var(--g2);
+  background: var(--w);
+  border-radius: 16px;
+  padding: 0.7rem 1.3rem;
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 52px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab:hover { border-color: var(--g5); }
+
+.tab.on {
+  background: var(--g7);
+  border-color: var(--g7);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(31, 107, 69, 0.25);
+}
+
+.det {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+.meds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.8rem;
+}
+
+label {
+  font-weight: 700;
+  display: block;
+  font-size: 0.85rem;
+  color: var(--mu);
+  margin-bottom: 0.3rem;
+}
+
+input, select {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid var(--g2);
+  border-radius: 14px;
+  background: var(--w);
+  font-weight: 700;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--g5);
+  outline: none;
+}
+
+.sel { margin-bottom: 1rem; }
+
+/* Pasos de Estado */
+.steps { display: grid; gap: 0.6rem; }
+
+.step {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 16px;
+  border: 2px solid var(--g2);
+  background: var(--w);
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  min-height: 54px;
+  transition: all 0.2s ease;
+}
+
+.step.past {
+  background: var(--g1);
+  color: var(--g7);
+  border-color: var(--g1);
+}
+
+.step.on {
+  background: var(--g7);
+  color: #fff;
+  border-color: var(--g7);
+  box-shadow: 0 4px 12px rgba(31, 107, 69, 0.25);
+}
+
+/* Campos de entrada en filas */
+.add {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.add .btn { padding: 0.6rem 1.1rem; flex: none; }
+
+.x {
+  border: 0;
+  background: none;
+  color: var(--rd);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.x:hover { background: var(--rdb); }
+
+/* Galería de fotos */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+}
+
+.ph {
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: var(--g1);
+  display: grid;
+  place-items: center;
+  color: var(--g5);
+  overflow: hidden;
+  position: relative;
+}
+
+.ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.up {
+  cursor: pointer;
+  border: 2px dashed var(--g5);
+  color: var(--g7);
+  font-weight: 800;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.up:hover { background: var(--g1); }
+
+/* Resumen financiero */
+.sum {
+  background: var(--g1);
+  border-radius: 18px;
+  padding: 1.1rem;
+  margin: 1rem 0;
+}
+
+.sum .row {
+  border-bottom: 2px dashed var(--g2);
+}
+
+.sum .row:last-child {
+  border: 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--g9);
+  padding-top: 0.7rem;
+}
+
+.back { margin-bottom: 1.2rem; }
+
+/* Mensaje emergente (Toast) */
+.toast {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--g9);
+  color: #fff;
+  padding: 0.85rem 1.6rem;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  box-shadow: var(--shadow-float);
+  z-index: 1000;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, -20px) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.toast[hidden] { display: none; }
+
+/* --- RESPONSIVE & NAVEGACIÓN FLOTANTE MÓVIL --- */
+@media (max-width: 900px) {
+  .two { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  body {
+    flex-direction: column;
+  }
+
+  /* BARRA DE NAVEGACIÓN FLOTANTE TIPO APP EN MÓVIL */
+  aside {
+    width: calc(100% - 1.6rem);
+    height: auto;
+    position: fixed;
+    bottom: 0.9rem;
+    left: 0.8rem;
+    right: 0.8rem;
+    top: auto;
+    z-index: 900;
+    flex-direction: row;
+    padding: 0.4rem 0.6rem;
+    border-radius: 28px;
+    background: rgba(13, 49, 31, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow-float);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo, .zoom span {
+    display: none;
+  }
+
+  .zoom {
+    margin: 0;
+    padding: 0.75rem;
+    width: auto;
+    border-radius: 20px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-around;
+    gap: 0.3rem;
+  }
+
+  nav button {
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.55rem 0.4rem;
+    font-size: 0.75rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+  }
+
+  nav button .i {
+    width: 1.4em;
+    height: 1.4em;
+  }
+
+  nav button.on {
+    background: #ffffff;
+    color: var(--g9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Espacio extra abajo para que el contenido no quede oculto por la barra flotante */
+  main {
+    padding: 1.5rem 1rem 7.5rem 1rem;
+  }
+
+  h1 { font-size: 1.6rem; }
+  
+  .det { grid-template-columns: 1fr; }
+  
+  .meds {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>
 </head>
 <body>
+
+<!-- BIBLIOTECA DE ICONOS SVG -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
@@ -117,137 +772,378 @@ input:focus,select:focus{border-color:var(--g5);outline:none}
 <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
 </svg>
 
+<!-- BARRA LATERAL (DESKTOP) / BARRA FLOTANTE (MÓVIL) -->
 <aside>
-  <div class="logo"><span><svg class="i"><use href="#i-cut"/></svg></span>Taller de Costura</div>
+  <div class="logo">
+    <span><svg class="i"><use href="#i-cut"/></svg></span>
+    Taller Costura
+  </div>
   <nav>
-    <button data-v="home" onclick="go('home')"><svg class="i"><use href="#i-home"/></svg>Inicio</button>
-    <button data-v="clients" onclick="go('clients')"><svg class="i"><use href="#i-users"/></svg>Clientes</button>
-    <button data-v="pay" onclick="go('pay')"><svg class="i"><use href="#i-money"/></svg>Cobros</button>
+    <button data-v="home" onclick="go('home')">
+      <svg class="i"><use href="#i-home"/></svg>Inicio
+    </button>
+    <button data-v="clients" onclick="go('clients')">
+      <svg class="i"><use href="#i-users"/></svg>Clientes
+    </button>
+    <button data-v="pay" onclick="go('pay')">
+      <svg class="i"><use href="#i-money"/></svg>Cobros
+    </button>
   </nav>
-  <button class="zoom" onclick="document.documentElement.classList.toggle('big')"><svg class="i"><use href="#i-text"/></svg><span>Letra más grande</span></button>
+  <button class="zoom" onclick="document.documentElement.classList.toggle('big')" title="Cambiar tamaño de texto">
+    <svg class="i"><use href="#i-text"/></svg><span>Zoom</span>
+  </button>
 </aside>
+
+<!-- CONTENEDOR PRINCIPAL -->
 <main id="main"></main>
+
+<!-- NOTIFICACIÓN EMERGENTE (TOAST) -->
 <div class="toast" id="toast" hidden></div>
 
 <script>
 const $ = s => document.querySelector(s);
-const money = n => '$ ' + n.toLocaleString('es-AR');
+const money = n => '$ ' + Number(n).toLocaleString('es-AR');
 const ico = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
-const ESTADOS = ['Por empezar','En proceso','Casi terminada','Lista para retirar','Entregada'];
+
+const ESTADOS = ['Por empezar', 'En proceso', 'Casi terminada', 'Lista para retirar', 'Entregada'];
+
 const MED = {
-  tutu:['Cintura','Cadera','Largo de pollera','Contorno de busto','Largo de torso','Hombro'],
-  vestido:['Busto','Cintura','Cadera','Largo de falda','Largo de espalda','Hombro','Manga','Escote'],
-  pantalon:['Cintura','Cadera','Tiro','Largo','Rodilla','Basta'],
-  capa:['Largo','Contorno de cuello','Ancho de hombros']
+  tutu: ['Cintura', 'Cadera', 'Largo pollera', 'Contorno busto', 'Largo torso', 'Hombro'],
+  vestido: ['Busto', 'Cintura', 'Cadera', 'Largo falda', 'Largo espalda', 'Hombro', 'Manga', 'Escote'],
+  pantalon: ['Cintura', 'Cadera', 'Tiro', 'Largo', 'Rodilla', 'Basta'],
+  capa: ['Largo', 'Contorno cuello', 'Ancho hombros']
 };
-const TIPOS = {tutu:'Tutú / pollera',vestido:'Vestido',pantalon:'Pantalón',capa:'Capa'};
 
+const TIPOS = {
+  tutu: 'Tutú / pollera',
+  vestido: 'Vestido',
+  pantalon: 'Pantalón',
+  capa: 'Capa'
+};
+
+// Datos del taller
 let data = [
- {id:1,grupo:true,nombre:'Ballet Estrella',detalle:'Fiesta de fin de año · 8 bailarinas',entrega:'12 de diciembre',pagado:30000,
-  fotos:[],faltan:[{t:'Elástico blanco, 3 metros',ok:false},{t:'Cierres de 40 cm (8)',ok:true}],
-  prendas:[{n:'Tutú',tipo:'tutu',estado:1,precio:28000,med:{Cintura:'62',Cadera:'88'}},
-           {n:'Corpiño',tipo:'vestido',estado:0,precio:18000,med:{}},
-           {n:'Capa',tipo:'capa',estado:0,precio:15000,med:{}}]},
- {id:2,grupo:false,nombre:'Marta Gómez',detalle:'Vestido de fiesta · 15 años de su nieta',entrega:'28 de noviembre',pagado:40000,
-  fotos:[],faltan:[{t:'Botones forrados (12)',ok:false}],
-  prendas:[{n:'Vestido de fiesta',tipo:'vestido',estado:2,precio:85000,med:{Busto:'96',Cintura:'78',Cadera:'104'}}]},
- {id:3,grupo:false,nombre:'Lucía Fernández',detalle:'Arreglo de pantalón',entrega:'3 de noviembre',pagado:6000,
-  fotos:[],faltan:[],
-  prendas:[{n:'Pantalón',tipo:'pantalon',estado:3,precio:6000,med:{Basta:'4'}}]}
+  {
+    id: 1, grupo: true, nombre: 'Ballet Estrella', detalle: 'Fiesta de fin de año · 8 bailarinas', entrega: '12 de diciembre', pagado: 30000,
+    fotos: [], faltan: [{t: 'Elástico blanco, 3 metros', ok: false}, {t: 'Cierres de 40 cm (8)', ok: true}],
+    prendas: [
+      {n: 'Tutú', tipo: 'tutu', estado: 1, precio: 28000, med: {Cintura: '62', Cadera: '88'}},
+      {n: 'Corpiño', tipo: 'vestido', estado: 0, precio: 18000, med: {}},
+      {n: 'Capa', tipo: 'capa', estado: 0, precio: 15000, med: {}}
+    ]
+  },
+  {
+    id: 2, grupo: false, nombre: 'Marta Gómez', detalle: 'Vestido de fiesta · 15 años de su nieta', entrega: '28 de noviembre', pagado: 40000,
+    fotos: [], faltan: [{t: 'Botones forrados (12)', ok: false}],
+    prendas: [
+      {n: 'Vestido de fiesta', tipo: 'vestido', estado: 2, precio: 85000, med: {Busto: '96', Cintura: '78', Cadera: '104'}}
+    ]
+  },
+  {
+    id: 3, grupo: false, nombre: 'Lucía Fernández', detalle: 'Arreglo de pantalón', entrega: '3 de noviembre', pagado: 6000,
+    fotos: [], faltan: [],
+    prendas: [
+      {n: 'Pantalón', tipo: 'pantalon', estado: 3, precio: 6000, med: {Basta: '4'}}
+    ]
+  }
 ];
+
 let tasks = [
- {t:'Cortar la tela del corpiño',s:'Ballet Estrella · hoy',done:false},
- {t:'Pedir elástico blanco',s:'Ballet Estrella · mañana',done:false},
- {t:'Probar vestido a Marta',s:'Marta Gómez · viernes',done:false},
- {t:'Avisar que el pantalón está listo',s:'Lucía Fernández',done:true}
+  {t: 'Cortar la tela del corpiño', s: 'Ballet Estrella · hoy', done: false},
+  {t: 'Pedir elástico blanco', s: 'Ballet Estrella · mañana', done: false},
+  {t: 'Probar vestido a Marta', s: 'Marta Gómez · viernes', done: false},
+  {t: 'Avisar que el pantalón está listo', s: 'Lucía Fernández', done: true}
 ];
-let view='home', cur=null, pi=0;
 
-const total = c => c.prendas.reduce((a,p)=>a+p.precio,0);
-const pagoChip = c => { const t=total(c); return c.pagado>=t?['Pagado completo','ok']:c.pagado>0?['Con seña','mid']:['Sin pago','no']; };
-const ini = n => n.split(' ').map(w=>w[0]).slice(0,2).join('');
-function toast(m){const t=$('#toast');t.innerHTML=ico('ok')+m;t.hidden=false;clearTimeout(toast.k);toast.k=setTimeout(()=>t.hidden=true,2200);}
-function go(v,id){view=v;cur=id||null;pi=0;render();window.scrollTo(0,0);}
+let view = 'home', cur = null, pi = 0;
 
-function render(){
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===(view==='detail'?'clients':view)));
-  $('#main').innerHTML = {home:home,clients:clients,pay:pay,detail:detail}[view]();
+const total = c => c.prendas.reduce((a, p) => a + p.precio, 0);
+
+const pagoChip = c => {
+  const t = total(c);
+  return c.pagado >= t ? ['Pagado completo', 'ok'] : c.pagado > 0 ? ['Con seña', 'mid'] : ['Sin pago', 'no'];
+};
+
+const ini = n => n.split(' ').map(w => w[0]).slice(0, 2).join('');
+
+function toast(m) {
+  const t = $('#toast');
+  t.innerHTML = ico('ok') + m;
+  t.hidden = false;
+  clearTimeout(toast.k);
+  toast.k = setTimeout(() => t.hidden = true, 2200);
 }
 
-function home(){
-  const cob = data.reduce((a,c)=>a+c.pagado,0), deb = data.reduce((a,c)=>a+total(c)-c.pagado,0);
-  const enProc = data.flatMap(c=>c.prendas).filter(p=>p.estado<3).length;
-  const sem = [['Sem 1',38000],['Sem 2',52000],['Sem 3',41000],['Esta',cob]];
-  const mx = Math.max(...sem.map(s=>s[1]));
-  return `<h1>Buen día 👋</h1><p class="sub">Esto es lo que hay para hoy en el taller.</p>
+function go(v, id) {
+  view = v;
+  cur = id || null;
+  pi = 0;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function render() {
+  document.querySelectorAll('nav button').forEach(b => {
+    b.classList.toggle('on', b.dataset.v === (view === 'detail' ? 'clients' : view));
+  });
+  $('#main').innerHTML = {home: home, clients: clients, pay: pay, detail: detail}[view]();
+}
+
+function home() {
+  const cob = data.reduce((a, c) => a + c.pagado, 0);
+  const deb = data.reduce((a, c) => a + total(c) - c.pagado, 0);
+  const enProc = data.flatMap(c => c.prendas).filter(p => p.estado < 3).length;
+  const sem = [['Sem 1', 38000], ['Sem 2', 52000], ['Sem 3', 41000], ['Esta', cob]];
+  const mx = Math.max(...sem.map(s => s[1]));
+
+  return `
+  <h1>¡Hola de nuevo! 👋</h1>
+  <p class="sub">Resumen general y pendientes del taller para hoy.</p>
+  
   <div class="grid stats">
-    <div class="card stat main"><div class="ic">${ico('money')}</div><div><small>Cobrado este mes</small><b>${money(cob+131000)}</b></div></div>
-    <div class="card stat"><div class="ic">${ico('flag')}</div><div><small>Falta cobrar</small><b>${money(deb)}</b></div></div>
-    <div class="card stat"><div class="ic">${ico('cut')}</div><div><small>Prendas en trabajo</small><b>${enProc}</b></div></div>
+    <div class="card stat main">
+      <div class="ic">${ico('money')}</div>
+      <div>
+        <small>Cobrado este mes</small>
+        <b>${money(cob + 131000)}</b>
+      </div>
+    </div>
+    <div class="card stat">
+      <div class="ic">${ico('flag')}</div>
+      <div>
+        <small>Falta cobrar</small>
+        <b>${money(deb)}</b>
+      </div>
+    </div>
+    <div class="card stat">
+      <div class="ic">${ico('cut')}</div>
+      <div>
+        <small>Prendas en proceso</small>
+        <b>${enProc}</b>
+      </div>
+    </div>
   </div>
+
   <div class="grid two">
-    <div class="card"><h2>${ico('list')}Para hacer</h2>
-      ${tasks.map((k,i)=>`<div class="task ${k.done?'done':''}" onclick="tasks[${i}].done=!tasks[${i}].done;render()"><div class="box">${k.done?ico('ok'):''}</div><div class="t"><b>${k.t}</b><small>${k.s}</small></div></div>`).join('')}
-      <div class="add"><button class="btn out" onclick="toast('Aquí se agregará una tarea nueva')">${ico('plus')}Nueva tarea</button></div>
+    <div class="card">
+      <h2>${ico('list')}Para hacer</h2>
+      ${tasks.map((k, i) => `
+        <div class="task ${k.done ? 'done' : ''}" onclick="tasks[${i}].done = !tasks[${i}].done; render()">
+          <div class="box">${k.done ? ico('ok') : ''}</div>
+          <div class="t">
+            <b>${k.t}</b>
+            <small>${k.s}</small>
+          </div>
+        </div>
+      `).join('')}
+      <div class="add">
+        <button class="btn out" style="width:100%" onclick="toast('Aquí se agregará una nueva tarea')">
+          ${ico('plus')}Nueva tarea
+        </button>
+      </div>
     </div>
-    <div class="card"><h2>${ico('money')}Ingresos por semana</h2>
-      <div class="bars">${sem.map(s=>`<div class="bar">${money(s[1]).replace('$ ','$')}<i style="height:${s[1]/mx*70}%"></i>${s[0]}</div>`).join('')}</div>
+
+    <div class="card">
+      <h2>${ico('money')}Ingresos por semana</h2>
+      <div class="bars">
+        ${sem.map(s => `
+          <div class="bar">
+            ${money(s[1]).replace('$ ', '$')}
+            <i style="height:${Math.max(15, (s[1] / mx) * 75)}%"></i>
+            ${s[0]}
+          </div>
+        `).join('')}
+      </div>
     </div>
   </div>`;
 }
 
-function clients(){
-  return `<div class="top"><div><h1>Clientes</h1><p class="sub">Toque un nombre para ver sus prendas y medidas.</p></div>
-    <button class="btn" onclick="toast('Aquí se creará un cliente o grupo nuevo')">${ico('plus')}Nuevo cliente</button></div>
-  <div class="grid list">${data.map(c=>{const [l,k]=pagoChip(c);return `
-    <button class="card cl" onclick="go('detail',${c.id})">
-      <div class="h"><div class="av">${c.grupo?ico('users'):ini(c.nombre)}</div><div><b>${c.nombre}</b><small>${c.detalle}</small></div></div>
-      <div class="row"><span>${c.prendas.length} prenda${c.prendas.length>1?'s':''}</span><span class="chip ${k}">${l}</span></div>
-      <div class="row"><span>Entrega: <b>${c.entrega}</b></span></div>
-      ${c.faltan.some(f=>!f.ok)?`<span class="chip mid">${ico('box')} Falta traer material</span>`:''}
-    </button>`}).join('')}</div>`;
+function clients() {
+  return `
+  <div class="top">
+    <div>
+      <h1>Clientes</h1>
+      <p class="sub">Toca un cliente para ver sus prendas, medidas y pagos.</p>
+    </div>
+    <button class="btn" onclick="toast('Crear nuevo cliente o grupo')">
+      ${ico('plus')}Nuevo cliente
+    </button>
+  </div>
+
+  <div class="grid list">
+    ${data.map(c => {
+      const [l, k] = pagoChip(c);
+      return `
+      <button class="card cl" onclick="go('detail', ${c.id})">
+        <div class="h">
+          <div class="av">${c.grupo ? ico('users') : ini(c.nombre)}</div>
+          <div>
+            <b>${c.nombre}</b>
+            <small>${c.detalle}</small>
+          </div>
+        </div>
+        <div class="row">
+          <span>${c.prendas.length} prenda${c.prendas.length > 1 ? 's' : ''}</span>
+          <span class="chip ${k}">${l}</span>
+        </div>
+        <div class="row">
+          <span style="font-size:0.85rem">Entrega: <b>${c.entrega}</b></span>
+        </div>
+        ${c.faltan.some(f => !f.ok) ? `<span class="chip mid">${ico('box')} Falta traer material</span>` : ''}
+      </button>`;
+    }).join('')}
+  </div>`;
 }
 
-function pay(){
-  return `<h1>Cobros</h1><p class="sub">Quién pagó y quién todavía debe.</p>
-  <div class="grid">${data.map(c=>{const [l,k]=pagoChip(c);return `<div class="card"><div class="row"><b style="font-size:1.2rem">${c.nombre}</b><span class="chip ${k}">${l}</span></div>
-   <div class="row"><span>Total</span><b>${money(total(c))}</b></div><div class="row"><span>Pagó</span><b>${money(c.pagado)}</b></div>
-   <div class="row"><span>Debe</span><b>${money(Math.max(0,total(c)-c.pagado))}</b></div></div>`}).join('')}</div>`;
+function pay() {
+  return `
+  <h1>Cobros y Balances</h1>
+  <p class="sub">Estado de pagos y saldos pendientes.</p>
+
+  <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+    ${data.map(c => {
+      const [l, k] = pagoChip(c);
+      const deb = Math.max(0, total(c) - c.pagado);
+      return `
+      <div class="card">
+        <div class="row" style="margin-bottom:0.6rem">
+          <b style="font-size:1.15rem">${c.nombre}</b>
+          <span class="chip ${k}">${l}</span>
+        </div>
+        <div class="row"><span>Presupuesto total</span><b>${money(total(c))}</b></div>
+        <div class="row"><span>Seña / Pagado</span><b style="color:var(--g7)">${money(c.pagado)}</b></div>
+        <div class="row" style="border-top:1.5px dashed var(--g2); padding-top:0.6rem; margin-top:0.2rem">
+          <span>Sueldo pendiente</span><b style="color:${deb > 0 ? 'var(--rd)' : 'var(--mu)'}">${money(deb)}</b>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
 }
 
-function detail(){
-  const c = data.find(x=>x.id===cur), p = c.prendas[pi], [l,k] = pagoChip(c), t = total(c);
-  return `<button class="btn out back" onclick="go('clients')">${ico('back')}Volver a clientes</button>
-  <div class="top"><div><h1>${c.nombre}</h1><p class="sub">${c.detalle} · Entrega: ${c.entrega}</p></div><span class="chip ${k}">${l}</span></div>
-  <div class="tabs">${c.prendas.map((x,i)=>`<button class="tab ${i===pi?'on':''}" onclick="pi=${i};render()">${x.n}</button>`).join('')}
-    <button class="tab" onclick="toast('Aquí se agregará otra prenda')">${ico('plus')} Agregar prenda</button></div>
+function detail() {
+  const c = data.find(x => x.id === cur);
+  if (!c) return '';
+  const p = c.prendas[pi];
+  const [l, k] = pagoChip(c);
+  const t = total(c);
+
+  return `
+  <button class="btn out back" onclick="go('clients')">
+    ${ico('back')}Volver a clientes
+  </button>
+
+  <div class="top">
+    <div>
+      <h1>${c.nombre}</h1>
+      <p class="sub">${c.detalle} · Entrega: ${c.entrega}</p>
+    </div>
+    <span class="chip ${k}">${l}</span>
+  </div>
+
+  <div class="tabs">
+    ${c.prendas.map((x, i) => `
+      <button class="tab ${i === pi ? 'on' : ''}" onclick="pi=${i}; render()">${x.n}</button>
+    `).join('')}
+    <button class="tab" onclick="toast('Agregar otra prenda')">${ico('plus')} Prenda</button>
+  </div>
+
   <div class="grid det">
-    <div class="card"><h2>${ico('ruler')}Medidas (cm)</h2>
-      <div class="sel"><label>Tipo de prenda</label><select onchange="p.tipo=this.value;render()">${Object.entries(TIPOS).map(([v,n])=>`<option value="${v}" ${p.tipo===v?'selected':''}>${n}</option>`).join('')}</select></div>
-      <div class="meds">${MED[p.tipo].map(m=>`<div><label>${m}</label><input type="number" inputmode="decimal" value="${p.med[m]||''}" oninput="p.med['${m}']=this.value"></div>`).join('')}</div>
+    <div class="card">
+      <h2>${ico('ruler')}Medidas (cm)</h2>
+      <div class="sel">
+        <label>Tipo de prenda</label>
+        <select onchange="p.tipo=this.value; render()">
+          ${Object.entries(TIPOS).map(([v, n]) => `<option value="${v}" ${p.tipo === v ? 'selected' : ''}>${n}</option>`).join('')}
+        </select>
+      </div>
+      <div class="meds">
+        ${MED[p.tipo].map(m => `
+          <div>
+            <label>${m}</label>
+            <input type="number" inputmode="decimal" value="${p.med[m] || ''}" oninput="p.med['${m}'] = this.value">
+          </div>
+        `).join('')}
+      </div>
     </div>
-    <div class="card"><h2>${ico('cut')}Estado de la prenda</h2>
-      <div class="steps">${ESTADOS.map((e,i)=>`<button class="step ${i<p.estado?'past':''} ${i===p.estado?'on':''}" onclick="p.estado=${i};render();toast('Estado: ${e}')">${i<=p.estado?ico('ok'):'<span style="width:1.4em"></span>'}${e}</button>`).join('')}</div>
+
+    <div class="card">
+      <h2>${ico('cut')}Estado de prenda</h2>
+      <div class="steps">
+        ${ESTADOS.map((e, i) => `
+          <button class="step ${i < p.estado ? 'past' : ''} ${i === p.estado ? 'on' : ''}" 
+                  onclick="p.estado=${i}; render(); toast('Estado: ${e}')">
+            ${i <= p.estado ? ico('ok') : '<span style="width:1.35em"></span>'}
+            ${e}
+          </button>
+        `).join('')}
+      </div>
     </div>
-    <div class="card"><h2>${ico('box')}Falta que el cliente traiga</h2>
-      ${c.faltan.length?c.faltan.map((f,i)=>`<div class="task ${f.ok?'done':''}"><div class="box" onclick="c.faltan[${i}].ok=!c.faltan[${i}].ok;render()">${f.ok?ico('ok'):''}</div><div class="t" style="flex:1" onclick="c.faltan[${i}].ok=!c.faltan[${i}].ok;render()"><b>${f.t}</b><small>${f.ok?'Ya lo trajo':'Pendiente'}</small></div><button class="x" aria-label="Quitar" onclick="c.faltan.splice(${i},1);render()">${ico('x')}</button></div>`).join(''):'<p class="sub">No falta nada. Agregue lo que el cliente deba traer.</p>'}
-      <div class="add"><input id="nf" placeholder="Ej: botones, cierre, cinta…"><button class="btn" onclick="const v=$('#nf').value.trim();if(v){c.faltan.push({t:v,ok:false});render()}">${ico('plus')}Agregar</button></div>
+
+    <div class="card">
+      <h2>${ico('box')}Materiales pendientes</h2>
+      ${c.faltan.length ? c.faltan.map((f, i) => `
+        <div class="task ${f.ok ? 'done' : ''}">
+          <div class="box" onclick="c.faltan[${i}].ok = !c.faltan[${i}].ok; render()">${f.ok ? ico('ok') : ''}</div>
+          <div class="t" style="flex:1" onclick="c.faltan[${i}].ok = !c.faltan[${i}].ok; render()">
+            <b>${f.t}</b>
+            <small>${f.ok ? 'Ya entregado' : 'Pendiente'}</small>
+          </div>
+          <button class="x" aria-label="Quitar" onclick="c.faltan.splice(${i}, 1); render()">${ico('x')}</button>
+        </div>
+      `).join('') : '<p class="sub">No hay materiales cargados como pendientes.</p>'}
+      
+      <div class="add">
+        <input id="nf" placeholder="Ej: botones, cierre, cinta…">
+        <button class="btn" onclick="const v = $('#nf').value.trim(); if(v){ c.faltan.push({t: v, ok: false}); render(); }">
+          ${ico('plus')}
+        </button>
+      </div>
     </div>
-    <div class="card"><h2>${ico('cam')}Fotos del cliente</h2>
-      <div class="photos">${c.fotos.map(u=>`<div class="ph"><img src="${u}" alt="Foto"></div>`).join('')}
-        <label class="ph up">${ico('plus')}<input type="file" accept="image/*" hidden onchange="if(this.files[0]){c.fotos.push(URL.createObjectURL(this.files[0]));render()}">Subir foto</label></div>
+
+    <div class="card">
+      <h2>${ico('cam')}Fotos de referencia</h2>
+      <div class="photos">
+        ${c.fotos.map(u => `
+          <div class="ph"><img src="${u}" alt="Foto prenda"></div>
+        `).join('')}
+        <label class="ph up">
+          ${ico('plus')}
+          <span>Subir</span>
+          <input type="file" accept="image/*" hidden onchange="if(this.files[0]){ c.fotos.push(URL.createObjectURL(this.files[0])); render(); }">
+        </label>
+      </div>
     </div>
-    <div class="card"><h2>${ico('money')}Precio y pagos</h2>
-      <div class="sel"><label>Precio de "${p.n}"</label><input type="number" value="${p.precio}" onchange="p.precio=+this.value||0;render()"></div>
-      <div class="sum">${c.prendas.map(x=>`<div class="row"><span>${x.n}</span><b>${money(x.precio)}</b></div>`).join('')}
+
+    <div class="card">
+      <h2>${ico('money')}Presupuesto y Cobros</h2>
+      <div class="sel">
+        <label>Precio de "${p.n}"</label>
+        <input type="number" value="${p.precio}" onchange="p.precio = +this.value || 0; render()">
+      </div>
+      <div class="sum">
+        ${c.prendas.map(x => `
+          <div class="row">
+            <span>${x.n}</span>
+            <b>${money(x.precio)}</b>
+          </div>
+        `).join('')}
         <div class="row"><span>Total</span><b>${money(t)}</b></div>
-        <div class="row"><span>Ya pagó</span><b>${money(c.pagado)}</b></div>
-        <div class="row"><span>Falta pagar</span><b>${money(Math.max(0,t-c.pagado))}</b></div></div>
-      <label>Registrar un pago</label>
-      <div class="add"><input id="ab" type="number" placeholder="Monto"><button class="btn" onclick="const v=+$('#ab').value;if(v>0){c.pagado+=v;render();toast('Pago registrado')}">${ico('ok')}Guardar</button></div>
+        <div class="row"><span>Pagado</span><b style="color:var(--g7)">${money(c.pagado)}</b></div>
+        <div class="row"><span>Falta pagar</span><b style="color:var(--rd)">${money(Math.max(0, t - c.pagado))}</b></div>
+      </div>
+      
+      <label>Registrar nuevo pago</label>
+      <div class="add">
+        <input id="ab" type="number" placeholder="Monto ($)">
+        <button class="btn" onclick="const v = +$('#ab').value; if(v > 0){ c.pagado += v; render(); toast('Pago registrado con éxito'); }">
+          ${ico('ok')}Guardar
+        </button>
+      </div>
     </div>
   </div>`;
 }
+
+// Renderizado inicial
 render();
 </script>
 </body>
